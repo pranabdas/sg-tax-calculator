@@ -169,3 +169,27 @@ footer {
   padding: 0.25em;
   border-radius: 5px;
 }
+
+th, td {
+  padding: 0.25em;
+}
+
+table, th, td {
+  border: 0.5px solid lightgrey;
+  border-collapse: collapse;
+}
+
+.form td > input::-webkit-outer-spin-button,
+.form td > input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.form td > input[type=number]{
+  -moz-appearance: textfield;
+}
+
+.form td > input {
+  border: transparent;
+  width: 100px;
+}
