@@ -1,5 +1,20 @@
 import React from "react";
 
+const RenderInput = ({ name, value, onChange }) => {
+  return (
+    <input
+      type="number"
+      step="0.01"
+      id={name}
+      name={name}
+      placeholder="0.00"
+      // short circuit to replace undefined/NaN/0 with empty string
+      value={value || ""}
+      onChange={onChange}
+    />
+  );
+};
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -38,6 +53,7 @@ class App extends React.Component {
     const name = target.name;
     let value = target.type === "checkbox" ? target.checked : target.value;
 
+    // input was entered and later cleared, or entered non-numeric input
     if (value === "") {
       value = 0;
     }
@@ -94,7 +110,7 @@ class App extends React.Component {
 
     if (isNaN(taxableIncome)) {
       taxableIncome = 0.0;
-      // tax rates are progressive, no tax below earning SGD 20,000.00
+      // tax rates are progressive starting above earning SGD 20,000.00
     } else if (taxableIncome <= 20000) {
       tax = 0.0;
     } else if (taxableIncome <= 30000) {
@@ -185,13 +201,9 @@ class App extends React.Component {
                   <tr>
                     <td>Employment income</td>
                     <td>
-                      <input
-                        type="number"
-                        step="0.01"
-                        id="income"
+                      <RenderInput
                         name="income"
-                        placeholder="0.00"
-                        value={this.state.income || ""}
+                        value={this.state.income}
                         onChange={this.handleChange}
                       />
                     </td>
@@ -199,13 +211,9 @@ class App extends React.Component {
                   <tr>
                     <td>Employment expenses</td>
                     <td>
-                      <input
-                        type="number"
-                        step="0.01"
-                        id="expense"
+                      <RenderInput
                         name="expense"
-                        placeholder="0.00"
-                        value={this.state.expense || ""}
+                        value={this.state.expense}
                         onChange={this.handleChange}
                       />
                     </td>
@@ -213,13 +221,9 @@ class App extends React.Component {
                   <tr>
                     <td>Income from trade, business etc.</td>
                     <td>
-                      <input
-                        type="number"
-                        step="0.01"
-                        id="tradeIncome"
+                      <RenderInput
                         name="tradeIncome"
-                        placeholder="0.00"
-                        value={this.state.tradeIncome || ""}
+                        value={this.state.tradeIncome}
                         onChange={this.handleChange}
                       />
                     </td>
@@ -228,13 +232,9 @@ class App extends React.Component {
                     <td>Dividends earned</td>
                     <td>
                       {" "}
-                      <input
-                        type="number"
-                        step="0.01"
-                        id="dividends"
+                      <RenderInput
                         name="dividends"
-                        placeholder="0.00"
-                        value={this.state.dividends || ""}
+                        value={this.state.dividends}
                         onChange={this.handleChange}
                       />
                     </td>
@@ -242,13 +242,9 @@ class App extends React.Component {
                   <tr>
                     <td>Interests earned</td>
                     <td>
-                      <input
-                        type="number"
-                        step="0.01"
-                        id="interests"
+                      <RenderInput
                         name="interests"
-                        placeholder="0.00"
-                        value={this.state.interests || ""}
+                        value={this.state.interests}
                         onChange={this.handleChange}
                       />
                     </td>
@@ -256,13 +252,9 @@ class App extends React.Component {
                   <tr>
                     <td>Rent from property</td>
                     <td>
-                      <input
-                        type="number"
-                        step="0.01"
-                        id="rentIncome"
+                      <RenderInput
                         name="rentIncome"
-                        placeholder="0.00"
-                        value={this.state.rentIncome || ""}
+                        value={this.state.rentIncome}
                         onChange={this.handleChange}
                       />
                     </td>
@@ -270,13 +262,9 @@ class App extends React.Component {
                   <tr>
                     <td>Royalty, estate/trust income</td>
                     <td>
-                      <input
-                        type="number"
-                        step="0.01"
-                        id="royalty"
+                      <RenderInput
                         name="royalty"
-                        placeholder="0.00"
-                        value={this.state.royalty || ""}
+                        value={this.state.royalty}
                         onChange={this.handleChange}
                       />
                     </td>
@@ -284,13 +272,9 @@ class App extends React.Component {
                   <tr>
                     <td>Gains/Profits of an income nature</td>
                     <td>
-                      <input
-                        type="number"
-                        step="0.01"
-                        id="gains"
+                      <RenderInput
                         name="gains"
-                        placeholder="0.00"
-                        value={this.state.gains || ""}
+                        value={this.state.gains}
                         onChange={this.handleChange}
                       />
                     </td>
@@ -298,13 +282,9 @@ class App extends React.Component {
                   <tr>
                     <td>Approved donations</td>
                     <td>
-                      <input
-                        type="number"
-                        step="0.01"
-                        id="donations"
+                      <RenderInput
                         name="donations"
-                        placeholder="0.00"
-                        value={this.state.donations || ""}
+                        value={this.state.donations}
                         onChange={this.handleChange}
                       />
                     </td>
@@ -312,13 +292,9 @@ class App extends React.Component {
                   <tr>
                     <td>Earned income relief</td>
                     <td>
-                      <input
-                        type="number"
-                        step="0.01"
-                        id="relief"
+                      <RenderInput
                         name="relief"
-                        placeholder="0.00"
-                        value={this.state.relief || ""}
+                        value={this.state.relief}
                         onChange={this.handleChange}
                       />
                     </td>
@@ -326,13 +302,9 @@ class App extends React.Component {
                   <tr>
                     <td>Spouse/handicapped spouse relief</td>
                     <td>
-                      <input
-                        type="number"
-                        step="0.01"
-                        id="spouseRelief"
+                      <RenderInput
                         name="spouseRelief"
-                        placeholder="0.00"
-                        value={this.state.spouseRelief || ""}
+                        value={this.state.spouseRelief}
                         onChange={this.handleChange}
                       />
                     </td>
@@ -340,13 +312,9 @@ class App extends React.Component {
                   <tr>
                     <td>Qualifying/handicapped child relief</td>
                     <td>
-                      <input
-                        type="number"
-                        step="0.01"
-                        id="childRelief"
+                      <RenderInput
                         name="childRelief"
-                        placeholder="0.00"
-                        value={this.state.childRelief || ""}
+                        value={this.state.childRelief}
                         onChange={this.handleChange}
                       />
                     </td>
@@ -354,13 +322,9 @@ class App extends React.Component {
                   <tr>
                     <td>Working mother's child relief</td>
                     <td>
-                      <input
-                        type="number"
-                        step="0.01"
-                        id="workingMotherChildRelief"
+                      <RenderInput
                         name="workingMotherChildRelief"
-                        placeholder="0.00"
-                        value={this.state.workingMotherChildRelief || ""}
+                        value={this.state.workingMotherChildRelief}
                         onChange={this.handleChange}
                       />
                     </td>
@@ -368,13 +332,9 @@ class App extends React.Component {
                   <tr>
                     <td>Parent/handicapped parent relief</td>
                     <td>
-                      <input
-                        type="number"
-                        step="0.01"
-                        id="parentRelief"
+                      <RenderInput
                         name="parentRelief"
-                        placeholder="0.00"
-                        value={this.state.parentRelief || ""}
+                        value={this.state.parentRelief}
                         onChange={this.handleChange}
                       />
                     </td>
@@ -382,13 +342,9 @@ class App extends React.Component {
                   <tr>
                     <td>Grandparent caregiver relief</td>
                     <td>
-                      <input
-                        type="number"
-                        step="0.01"
-                        id="grandParentRelief"
+                      <RenderInput
                         name="grandParentRelief"
-                        placeholder="0.00"
-                        value={this.state.grandParentRelief || ""}
+                        value={this.state.grandParentRelief}
                         onChange={this.handleChange}
                       />
                     </td>
@@ -396,13 +352,9 @@ class App extends React.Component {
                   <tr>
                     <td>Handicapped brother/sister relief</td>
                     <td>
-                      <input
-                        type="number"
-                        step="0.01"
-                        id="siblingRelief"
+                      <RenderInput
                         name="siblingRelief"
-                        placeholder="0.00"
-                        value={this.state.siblingRelief || ""}
+                        value={this.state.siblingRelief}
                         onChange={this.handleChange}
                       />
                     </td>
@@ -410,13 +362,9 @@ class App extends React.Component {
                   <tr>
                     <td>CPF/provident fund relief</td>
                     <td>
-                      <input
-                        type="number"
-                        step="0.01"
-                        id="CPFRelief"
+                      <RenderInput
                         name="CPFRelief"
-                        placeholder="0.00"
-                        value={this.state.CPFRelief || ""}
+                        value={this.state.CPFRelief}
                         onChange={this.handleChange}
                       />
                     </td>
@@ -424,13 +372,9 @@ class App extends React.Component {
                   <tr>
                     <td>Life insurance relief</td>
                     <td>
-                      <input
-                        type="number"
-                        step="0.01"
-                        id="lifeInsuranceRelief"
+                      <RenderInput
                         name="lifeInsuranceRelief"
-                        placeholder="0.00"
-                        value={this.state.lifeInsuranceRelief || ""}
+                        value={this.state.lifeInsuranceRelief}
                         onChange={this.handleChange}
                       />
                     </td>
@@ -438,13 +382,9 @@ class App extends React.Component {
                   <tr>
                     <td>Course fees relief</td>
                     <td>
-                      <input
-                        type="number"
-                        step="0.01"
-                        id="courseFeesRelief"
+                      <RenderInput
                         name="courseFeesRelief"
-                        placeholder="0.00"
-                        value={this.state.courseFeesRelief || ""}
+                        value={this.state.courseFeesRelief}
                         onChange={this.handleChange}
                       />
                     </td>
@@ -452,13 +392,9 @@ class App extends React.Component {
                   <tr>
                     <td>Foreign domestic worker levy relief</td>
                     <td>
-                      <input
-                        type="number"
-                        step="0.01"
-                        id="domesticWorkerRelief"
+                      <RenderInput
                         name="domesticWorkerRelief"
-                        placeholder="0.00"
-                        value={this.state.domesticWorkerRelief || ""}
+                        value={this.state.domesticWorkerRelief}
                         onChange={this.handleChange}
                       />
                     </td>
@@ -466,13 +402,9 @@ class App extends React.Component {
                   <tr>
                     <td>CPF cash top-up relief</td>
                     <td>
-                      <input
-                        type="number"
-                        step="0.01"
-                        id="CPFCashTopUpRelief"
+                      <RenderInput
                         name="CPFCashTopUpRelief"
-                        placeholder="0.00"
-                        value={this.state.CPFCashTopUpRelief || ""}
+                        value={this.state.CPFCashTopUpRelief}
                         onChange={this.handleChange}
                       />
                     </td>
@@ -480,13 +412,9 @@ class App extends React.Component {
                   <tr>
                     <td>SRS relief</td>
                     <td>
-                      <input
-                        type="number"
-                        step="0.01"
-                        id="SRSRelief"
+                      <RenderInput
                         name="SRSRelief"
-                        placeholder="0.00"
-                        value={this.state.SRSRelief || ""}
+                        value={this.state.SRSRelief}
                         onChange={this.handleChange}
                       />
                     </td>
@@ -494,13 +422,9 @@ class App extends React.Component {
                   <tr>
                     <td>National Service relief</td>
                     <td>
-                      <input
-                        type="number"
-                        step="0.01"
-                        id="NSRelief"
+                      <RenderInput
                         name="NSRelief"
-                        placeholder="0.00"
-                        value={this.state.NSRelief || ""}
+                        value={this.state.NSRelief}
                         onChange={this.handleChange}
                       />
                     </td>
@@ -508,13 +432,9 @@ class App extends React.Component {
                   <tr>
                     <td>Parenthood tax rebate</td>
                     <td>
-                      <input
-                        type="number"
-                        step="0.01"
-                        id="parenthoodRebate"
+                      <RenderInput
                         name="parenthoodRebate"
-                        placeholder="0.00"
-                        value={this.state.parenthoodRebate || ""}
+                        value={this.state.parenthoodRebate}
                         onChange={this.handleChange}
                       />
                     </td>
@@ -527,13 +447,9 @@ class App extends React.Component {
               <p>
                 Please enter your yearly taxable income (in Singapore dollar):
               </p>
-              <input
-                type="number"
-                step="0.01"
-                id="income"
+              <RenderInput
                 name="income"
-                placeholder="0.00"
-                value={this.state.income || ""}
+                value={this.state.income}
                 onChange={this.handleChange}
               />
             </div>
