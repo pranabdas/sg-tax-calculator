@@ -19,7 +19,7 @@ git clone --branch gh-pages https://github.com/pranabdas/sg-tax-calculator
 cd ..
 rsync -azh --exclude .git --delete build/ tmpghdeploy/sg-tax-calculator
 cd tmpghdeploy/sg-tax-calculator
-find . -type f -name \*.DS_Store -delete &> /dev/null
+find . -type f -name .DS_Store -delete &> /dev/null
 git add --all && git commit --amend --no-edit &> /dev/null
 git push origin gh-pages --force &> /dev/null
 echo "Deployed."

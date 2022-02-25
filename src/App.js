@@ -1,4 +1,5 @@
 import React from "react";
+import taxItems from "./taxItems";
 
 const RenderInput = ({ name, value, onChange }) => {
   return (
@@ -15,35 +16,16 @@ const RenderInput = ({ name, value, onChange }) => {
   );
 };
 
+const rowNames = taxItems.map((item) => item.name );
+// create an object for rowNames and initialize with 0
+const rowStates = rowNames.reduce((a, b) => ({...a, [b]: 0}), {});
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       advancedMode: false,
-      income: 0,
-      expense: 0,
-      tradeIncome: 0,
-      dividends: 0,
-      interests: 0,
-      rentIncome: 0,
-      royalty: 0,
-      gains: 0,
-      donations: 0,
-      relief: 0,
-      spouseRelief: 0,
-      childRelief: 0,
-      workingMotherChildRelief: 0,
-      parentRelief: 0,
-      grandParentRelief: 0,
-      siblingRelief: 0,
-      CPFRelief: 0,
-      lifeInsuranceRelief: 0,
-      courseFeesRelief: 0,
-      domesticWorkerRelief: 0,
-      CPFCashTopUpRelief: 0,
-      SRSRelief: 0,
-      NSRelief: 0,
-      parenthoodRebate: 0,
+      ...rowStates,
     };
   }
 
@@ -198,247 +180,18 @@ class App extends React.Component {
               </p>
               <table>
                 <tbody>
-                  <tr>
-                    <td>Employment income</td>
-                    <td>
-                      <RenderInput
-                        name="income"
-                        value={this.state.income}
-                        onChange={this.handleChange}
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Employment expenses</td>
-                    <td>
-                      <RenderInput
-                        name="expense"
-                        value={this.state.expense}
-                        onChange={this.handleChange}
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Income from trade, business etc.</td>
-                    <td>
-                      <RenderInput
-                        name="tradeIncome"
-                        value={this.state.tradeIncome}
-                        onChange={this.handleChange}
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Dividends earned</td>
-                    <td>
-                      {" "}
-                      <RenderInput
-                        name="dividends"
-                        value={this.state.dividends}
-                        onChange={this.handleChange}
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Interests earned</td>
-                    <td>
-                      <RenderInput
-                        name="interests"
-                        value={this.state.interests}
-                        onChange={this.handleChange}
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Rent from property</td>
-                    <td>
-                      <RenderInput
-                        name="rentIncome"
-                        value={this.state.rentIncome}
-                        onChange={this.handleChange}
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Royalty, estate/trust income</td>
-                    <td>
-                      <RenderInput
-                        name="royalty"
-                        value={this.state.royalty}
-                        onChange={this.handleChange}
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Gains/Profits of an income nature</td>
-                    <td>
-                      <RenderInput
-                        name="gains"
-                        value={this.state.gains}
-                        onChange={this.handleChange}
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Approved donations</td>
-                    <td>
-                      <RenderInput
-                        name="donations"
-                        value={this.state.donations}
-                        onChange={this.handleChange}
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Earned income relief</td>
-                    <td>
-                      <RenderInput
-                        name="relief"
-                        value={this.state.relief}
-                        onChange={this.handleChange}
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Spouse/handicapped spouse relief</td>
-                    <td>
-                      <RenderInput
-                        name="spouseRelief"
-                        value={this.state.spouseRelief}
-                        onChange={this.handleChange}
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Qualifying/handicapped child relief</td>
-                    <td>
-                      <RenderInput
-                        name="childRelief"
-                        value={this.state.childRelief}
-                        onChange={this.handleChange}
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Working mother's child relief</td>
-                    <td>
-                      <RenderInput
-                        name="workingMotherChildRelief"
-                        value={this.state.workingMotherChildRelief}
-                        onChange={this.handleChange}
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Parent/handicapped parent relief</td>
-                    <td>
-                      <RenderInput
-                        name="parentRelief"
-                        value={this.state.parentRelief}
-                        onChange={this.handleChange}
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Grandparent caregiver relief</td>
-                    <td>
-                      <RenderInput
-                        name="grandParentRelief"
-                        value={this.state.grandParentRelief}
-                        onChange={this.handleChange}
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Handicapped brother/sister relief</td>
-                    <td>
-                      <RenderInput
-                        name="siblingRelief"
-                        value={this.state.siblingRelief}
-                        onChange={this.handleChange}
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>CPF/provident fund relief</td>
-                    <td>
-                      <RenderInput
-                        name="CPFRelief"
-                        value={this.state.CPFRelief}
-                        onChange={this.handleChange}
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Life insurance relief</td>
-                    <td>
-                      <RenderInput
-                        name="lifeInsuranceRelief"
-                        value={this.state.lifeInsuranceRelief}
-                        onChange={this.handleChange}
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Course fees relief</td>
-                    <td>
-                      <RenderInput
-                        name="courseFeesRelief"
-                        value={this.state.courseFeesRelief}
-                        onChange={this.handleChange}
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Foreign domestic worker levy relief</td>
-                    <td>
-                      <RenderInput
-                        name="domesticWorkerRelief"
-                        value={this.state.domesticWorkerRelief}
-                        onChange={this.handleChange}
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>CPF cash top-up relief</td>
-                    <td>
-                      <RenderInput
-                        name="CPFCashTopUpRelief"
-                        value={this.state.CPFCashTopUpRelief}
-                        onChange={this.handleChange}
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>SRS relief</td>
-                    <td>
-                      <RenderInput
-                        name="SRSRelief"
-                        value={this.state.SRSRelief}
-                        onChange={this.handleChange}
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>National Service relief</td>
-                    <td>
-                      <RenderInput
-                        name="NSRelief"
-                        value={this.state.NSRelief}
-                        onChange={this.handleChange}
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Parenthood tax rebate</td>
-                    <td>
-                      <RenderInput
-                        name="parenthoodRebate"
-                        value={this.state.parenthoodRebate}
-                        onChange={this.handleChange}
-                      />
-                    </td>
-                  </tr>
+                  {taxItems.map((item, key) => (
+                    <tr key={key}>
+                      <td>{item.description}</td>
+                      <td>
+                        <RenderInput
+                          name={item.name}
+                          value={this.state[item.name]}
+                          onChange={this.handleChange}
+                        />
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
