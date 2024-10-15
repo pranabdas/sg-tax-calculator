@@ -16,9 +16,9 @@ const RenderInput = ({ name, value, onChange }) => {
   );
 };
 
-const rowNames = taxItems.map((item) => item.name );
+const rowNames = taxItems.map((item) => item.name);
 // create an object for rowNames and initialize with 0
-const rowStates = rowNames.reduce((a, b) => ({...a, [b]: 0}), {});
+const rowStates = rowNames.reduce((a, b) => ({ ...a, [b]: 0 }), {});
 
 class App extends React.Component {
   constructor(props) {
@@ -113,8 +113,12 @@ class App extends React.Component {
       tax = 28750 + ((taxableIncome - 240000) * 19.5) / 100;
     } else if (taxableIncome <= 320000) {
       tax = 36550 + ((taxableIncome - 280000) * 20.0) / 100;
-    } else if (taxableIncome > 320000) {
+    } else if (taxableIncome <= 500000) {
       tax = 44550 + ((taxableIncome - 320000) * 22.0) / 100;
+    } else if (taxableIncome <= 1000000) {
+      tax = 84150 + ((taxableIncome - 500000) * 23.0) / 100;
+    } else if (taxableIncome > 1000000) {
+      tax = 199150 + ((taxableIncome - 1000000) * 24.0) / 100;
     }
 
     if (this.state.advancedMode) {
@@ -135,11 +139,11 @@ class App extends React.Component {
         <br />
         <p>
           This app calculates personal income tax for Singapore residents. Tax
-          rates are last updated in January 2022 from{" "}
+          rates are last updated in October 2024 from{" "}
           <a
             target="_blank"
             rel="noreferrer"
-            href="https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/new-to-tax/individual-income-tax-rates"
+            href="https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/tax-residency-and-tax-rates/individual-income-tax-rates"
           >
             IRAS website
           </a>
@@ -236,7 +240,7 @@ class App extends React.Component {
         <br />
         <footer>
           Made with <span className="love">♥</span> by{" "}
-          <a href="https://pranabdas.github.io/">Pranab</a>.
+          <a href="https://github.com/pranabdas/sg-tax-calculator">Pranab</a>.
         </footer>
       </div>
     );
