@@ -117,7 +117,8 @@ class App extends React.Component {
       tax = 44550 + ((taxableIncome - 320000) * 22.0) / 100;
     } else if (taxableIncome <= 1000000) {
       tax = 84150 + ((taxableIncome - 500000) * 23.0) / 100;
-    } else if (taxableIncome > 1000000) {
+    } else {
+      // taxableIncome > 1000000
       tax = 199150 + ((taxableIncome - 1000000) * 24.0) / 100;
     }
 
